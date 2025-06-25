@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.PROD
-  ? '/api'  // In production, use relative URL (same domain)
-  : 'https://securesharing-backend.onrender.com';  // In development, use localhost
+const API_BASE_URL = 'https://securesharing-backend.onrender.com';
 
 // Create axios instance
 const api = axios.create({

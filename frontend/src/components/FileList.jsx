@@ -4,6 +4,9 @@ import { fileAPI } from '../services/api';
 const FileList = ({ files, onFileDeleted, onRefresh }) => {
   const [deletingId, setDeletingId] = useState(null);
 
+  // Ensure files is always an array
+  const safeFiles = Array.isArray(files) ? files : [];
+
   const handleDelete = async (fileId) => {
     if (!window.confirm('Are you sure you want to delete this file?')) {
       return;
@@ -39,7 +42,7 @@ const FileList = ({ files, onFileDeleted, onRefresh }) => {
     return new Date(dateString).toLocaleString();
   };
 
-  if (files.length === 0) {
+  if (safeFiles.length === 0) {
     return (
       <div className="no-files">
         <p>No files uploaded yet. Upload your first file above!</p>
@@ -49,7 +52,7 @@ const FileList = ({ files, onFileDeleted, onRefresh }) => {
 
   return (
     <div className="file-list">
-      {files.map((file) => (
+      {safeFiles.map((file) => (
         <div key={file._id} className="file-item">
           <div className="file-info">
             <h4>{file.originalFilename}</h4>

@@ -16,10 +16,13 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const response = await fileAPI.getUserFiles();
-      setFiles(response.data);
+      // Ensure response.data is an array
+      setFiles(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       setError('Failed to fetch files');
       console.error('Error fetching files:', error);
+      // Set files to empty array on error
+      setFiles([]);
     } finally {
       setLoading(false);
     }
