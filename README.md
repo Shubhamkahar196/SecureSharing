@@ -85,22 +85,22 @@ MONGODB_URI=mongodb://localhost:27017/securesharing
 # MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/securesharing
 
 # JWT Secret
-JWT_SECRET=your-super-secret-jwt-key-here
+- JWT_SECRET=your-super-secret-jwt-key-here
 
 # Server Port
-PORT=5000
+- PORT=5000
 
 # File Upload Settings
-MAX_FILE_SIZE=10485760  # 10MB in bytes
-UPLOAD_PATH=./uploads
+- MAX_FILE_SIZE=10485760  # 10MB in bytes
+- UPLOAD_PATH=./uploads
 
 5. Run the Application
-cd backend
-npm start
-The application will be available at:
+- cd backend
+- npm start
+- The application will be available at:
 
-Frontend: http://localhost:5173
-Backend API: http://localhost:5000
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:5000
 
 📁 Project Structure
 SecureSharing/
@@ -138,45 +138,49 @@ SecureSharing/
 └── README.md
 
 🔧 API Endpoints
-Authentication
-POST /api/auth/register - User registration
-POST /api/auth/login - User login
-GET /api/auth/me - Get current user info
-File Management
-POST /api/files/upload - Upload a file
-GET /api/files/my-files - Get user's files
-DELETE /api/files/:id - Delete a file
-File Viewing
-GET /api/view/:shareLink - Get file information
-POST /api/view/:shareLink/access - Access/download file
+
+- Authentication
+- POST /api/auth/register - User registration
+- POST /api/auth/login - User login
+- GET /api/auth/me - Get current user info
+- File Management
+- POST /api/files/upload - Upload a file
+- GET /api/files/my-files - Get user's files
+- DELETE /api/files/:id - Delete a file
+- File Viewing
+- GET /api/view/:shareLink - Get file information
+- POST /api/view/:shareLink/access - Access/download file
 
 🚀 Deployment
-Frontend (Render)
-Connect your GitHub repository to Render
-Set build command: npm install && npm run build
-Set publish directory: ./dist
-Backend (Render)
-Connect your GitHub repository to Render
-Set build command: npm install
-Set start command: npm start
-Add environment variables in Render dashboard
+
+- Frontend (Render)
+- Connect your GitHub repository to Render
+- Set build command: npm install && npm run build
+- Set publish directory: ./dist
+- Backend (Render)
+- Connect your GitHub repository to Render
+- Set build command: npm install
+- Set start command: npm start
+- Add environment variables in Render dashboard
 
 🤝 Contributing
-Fork the repository
-Create a feature branch (git checkout -b feature/amazing-feature)
-Commit your changes (git commit -m 'Add amazing feature')
-Push to the branch (git push origin feature/amazing-feature)
-Open a Pull Request
+- Fork the repository
+- Create a feature branch (git checkout -b feature/amazing-feature)
+- Commit your changes (git commit -m 'Add amazing feature')
+- Push to the branch (git push origin feature/amazing-feature)
+- Open a Pull Request
+
 📞 Support
 For support and questions:
 
-Email: ksk185246@gmail.com
-GitHub Issues: Create an issue
+- Email: ksk185246@gmail.com
+- GitHub Issues: Create an issue
+
 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+- This project is licensed under the MIT License - see the LICENSE file for details.
 
 🙏 Acknowledgments
-Built with modern web technologies
-Inspired by the need for secure file sharing
-Thanks to the open-source community
-Made with ❤️ by Shubham Kahar
+- Built with modern web technologies
+-Inspired by the need for secure file sharing
+- Thanks to the open-source community
+- Made with ❤️ by Shubham Kahar
