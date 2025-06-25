@@ -50,25 +50,25 @@ const Contact = () => {
             <div className="contact-methods">
               <div className="contact-method">
                 <h3>📧 Email Support</h3>
-                <p>support@securesharing.com</p>
+                <p>ksk185246@gmail.com</p>
                 <span>Response time: 24-48 hours</span>
               </div>
 
               <div className="contact-method">
                 <h3>💬 Live Chat</h3>
                 <p>Available Monday-Friday</p>
-                <span>9:00 AM - 6:00 PM EST</span>
+                <span>9:00 AM - 6:00 PM IST</span>
               </div>
 
               <div className="contact-method">
                 <h3>📞 Phone Support</h3>
-                <p>+1 (555) 123-4567</p>
+                <p>+91 8933853880</p>
                 <span>Business hours only</span>
               </div>
 
               <div className="contact-method">
                 <h3>🐛 Bug Reports</h3>
-                <p>bugs@securesharing.com</p>
+                <p>ksk185246@gmail.com</p>
                 <span>Technical issues and bugs</span>
               </div>
             </div>
@@ -171,7 +171,7 @@ const Contact = () => {
 
         <div className="contact-footer">
           <h3>Office Hours</h3>
-          <p>Monday - Friday: 9:00 AM - 6:00 PM EST</p>
+          <p>Monday - Friday: 9:00 AM - 6:00 PM IST</p>
           <p>Saturday - Sunday: Closed</p>
           <p>We aim to respond to all inquiries within 24-48 hours during business days.</p>
         </div>
