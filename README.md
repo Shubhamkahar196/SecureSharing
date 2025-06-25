@@ -82,7 +82,7 @@ npm install
 # Database
 MONGODB_URI=mongodb://localhost:27017/securesharing
 # or use MongoDB Atlas
-# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/securesharing
+# MONGODB_URI= your_ mongodb_ url
 
 # JWT Secret
 - JWT_SECRET=your-super-secret-jwt-key-here
