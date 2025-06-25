@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_BASE_URL = 'https://securesharing-backend.onrender.com/api';
+console.log('API Base URL configured:', API_BASE_URL);
 
 // Create axios instance
 const api = axios.create({
@@ -13,8 +14,21 @@ api.interceptors.request.use((config) => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+  console.log('API Request:', config.method?.toUpperCase(), config.baseURL + config.url);
   return config;
 });
+
+// Add response interceptor for debugging
+api.interceptors.response.use(
+  (response) => {
+    console.log('API Response:', response.status, response.config.url);
+    return response;
+  },
+  (error) => {
+    console.error('API Error:', error.response?.status, error.config?.url, error.message);
+    return Promise.reject(error);
+  }
+);
 
 // Auth API
 export const authAPI = {
@@ -36,8 +50,8 @@ export const fileAPI = {
 
 // View API
 export const viewAPI = {
-  getFileInfo: (shareLink) => axios.get(`${API_BASE_URL}/view/${shareLink}`),
-  accessFile: (shareLink, password = '') => axios.post(`${API_BASE_URL}/view/${shareLink}/access`, { password }, {
+  getFileInfo: (shareLink) => api.get(`/view/${shareLink}`),
+  accessFile: (shareLink, password = '') => api.post(`/view/${shareLink}/access`, { password }, {
     responseType: 'blob',
   }),
 };
