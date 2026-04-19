@@ -1,40 +1,62 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { fileAPI } from '../services/api';
 import FileUpload from '../components/FileUpload';
 import FileList from '../components/FileList';
+import toast from 'react-hot-toast';
 
 const Dashboard = () => {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
 
-  useEffect(() => {
-    fetchFiles();
-  }, []);
-
-  const fetchFiles = async () => {
+  // ===============================
+  //  Fetch Files
+  // ===============================
+  const fetchFiles = useCallback(async () => {
     try {
       setLoading(true);
+
       const response = await fileAPI.getUserFiles();
-      // Ensure response.data is an array
       setFiles(Array.isArray(response.data) ? response.data : []);
-    } catch (error) {
-      setError('Failed to fetch files');
-      console.error('Error fetching files:', error);
-      // Set files to empty array on error
+
+    } catch (err) {
+      console.error('Error fetching files:', err);
+      toast.error('Failed to fetch files ❌'); 
       setFiles([]);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const handleFileUploaded = (newFile) => {
-    setFiles(prev => [newFile, ...prev]);
-  };
+  useEffect(() => {
+    fetchFiles();
+  }, [fetchFiles]);
 
-  const handleFileDeleted = (fileId) => {
-    setFiles(prev => prev.filter(file => file._id !== fileId));
-  };
+  // ===============================
+  //  Upload Handler
+  // ===============================
+  const handleFileUploaded = useCallback((newFile) => {
+  console.log("NEW FILE RECEIVED:", newFile); // 🔥 ADD
+
+  setFiles((prev) => {
+    const updated = [newFile, ...prev];
+    console.log("UPDATED FILES:", updated); // 🔥 ADD
+    return updated;
+  });
+
+  toast.success('File uploaded successfully 🚀');
+}, []);
+  // const handleFileUploaded = useCallback((newFile) => {
+  //   setFiles((prev) => [newFile, ...prev]);
+  //   toast.success('File uploaded successfully 🚀'); 
+  // }, []);
+
+  // ===============================
+  //  Delete Handler
+  // ===============================
+  const handleFileDeleted = useCallback((fileId) => {
+    setFiles((prev) => prev.filter((file) => file._id !== fileId));
+    toast.success('File deleted 🗑️'); // 
+  }, []);
 
   return (
     <div className="dashboard">
@@ -44,19 +66,19 @@ const Dashboard = () => {
       </div>
 
       <div className="dashboard-content">
+        
         <div className="upload-section">
           <FileUpload onFileUploaded={handleFileUploaded} />
         </div>
 
         <div className="files-section">
           <h2>Your Files</h2>
-          {error && <div className="error-message">{error}</div>}
-          
+
           {loading ? (
             <div className="loading">Loading files...</div>
           ) : (
-            <FileList 
-              files={files} 
+            <FileList
+              files={files}
               onFileDeleted={handleFileDeleted}
               onRefresh={fetchFiles}
             />
@@ -68,3 +90,74 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+// import { useState, useEffect } from 'react';
+// import { fileAPI } from '../services/api';
+// import FileUpload from '../components/FileUpload';
+// import FileList from '../components/FileList';
+
+// const Dashboard = () => {
+//   const [files, setFiles] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState('');
+
+//   useEffect(() => {
+//     fetchFiles();
+//   }, []);
+
+//   const fetchFiles = async () => {
+//     try {
+//       setLoading(true);
+//       const response = await fileAPI.getUserFiles();
+//       // Ensure response.data is an array
+//       setFiles(Array.isArray(response.data) ? response.data : []);
+//     } catch (error) {
+//       setError('Failed to fetch files');
+//       console.error('Error fetching files:', error);
+//       // Set files to empty array on error
+//       setFiles([]);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const handleFileUploaded = (newFile) => {
+//     setFiles(prev => [newFile, ...prev]);
+//   };
+
+//   const handleFileDeleted = (fileId) => {
+//     setFiles(prev => prev.filter(file => file._id !== fileId));
+//   };
+
+//   return (
+//     <div className="dashboard">
+//       <div className="dashboard-header">
+//         <h1>Dashboard</h1>
+//         <p>Upload and manage your shared files</p>
+//       </div>
+
+//       <div className="dashboard-content">
+//         <div className="upload-section">
+//           <FileUpload onFileUploaded={handleFileUploaded} />
+//         </div>
+
+//         <div className="files-section">
+//           <h2>Your Files</h2>
+//           {error && <div className="error-message">{error}</div>}
+          
+//           {loading ? (
+//             <div className="loading">Loading files...</div>
+//           ) : (
+//             <FileList 
+//               files={files} 
+//               onFileDeleted={handleFileDeleted}
+//               onRefresh={fetchFiles}
+//             />
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Dashboard;
